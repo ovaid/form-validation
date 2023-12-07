@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  <script>
+    async function submitForm(e) {
+      // Simulate form submission (replace this with your actual form submission logic)
+      // For example, you can use AJAX or fetch to submit the form data to the server.
+      await new Promise(resolve => setTimeout(resolve, 1000));
+
+      // Display success message using SweetAlert
+      swal.fire({
+        icon: 'success',
+        title: 'Form Submitted!',
+        showConfirmButton: true,
+
+      });
+    }
+
+    function validateForm() {
+      let name = document.forms["myForm"]["fname"].value;
+      let age = document.forms["myForm"]["age"].value;
+      let address = document.forms["myForm"]["address"].value;
+      let email = document.forms["myForm"]["email"].value;
+
+      // Reset error messages
+      document.getElementById("errorName").innerText = "";
+      document.getElementById("errorAge").innerText = "";
+      document.getElementById("errorAddress").innerText = "";
+      document.getElementById("errorEmail").innerText = "";
+
+      let isValid = true;
+
+      // Validate each field individually
+      if (name === "") {
+        document.getElementById("errorName").innerText = "Name must be filled out";
+        isValid = false;
+      }
+
+      if (age === "") {
+        document.getElementById("errorAge").innerText = "Age must be filled out";
+        isValid = false;
+      }
+
+      if (address === "") {
+        document.getElementById("errorAddress").innerText = "Address must be filled out";
+        isValid = false;
+      }
+
+      if (email === "") {
+        document.getElementById("errorEmail").innerText = "Email must be filled out";
+        isValid = false;
+      }
+
+      if (isValid) {
+        // If all fields are filled, submit the form asynchronously
+        submitForm();
+        
+      }
+
+      // Prevent the form from submitting in the traditional way
+      return false;
+    }
+  </script>
+</head>
+<body>
+
+  <h2>JavaScript Validation</h2>
+
+  <form name="myForm" action="/action_page.php" onsubmit="return validateForm()" method="post">
+    Name: &nbsp;&nbsp;&nbsp;<input type="text" name="fname"><br/>
+    <span id="errorName" style="color: blue; text-align:center;"></span><br/>
+    Age: &nbsp; &nbsp;&nbsp;&nbsp;  <input type="text" name="age"><br/>
+    <span id="errorAge" style="color: blue; text-align:center;"></span><br/>
+    Address: <input type="text" name="address"><br/>
+    <span id="errorAddress" style="color: blue; text-align:center;"></span><br/>
+    Email:&nbsp;&nbsp;&nbsp; <input type="email" name="email"><br/>
+    <span id="errorEmail" style="color: blue; text-align:center;"></span><br/><br/>
+    <input type="submit" value="Submit">
+  </form>
+
+</body>
+</html>
